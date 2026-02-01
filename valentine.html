@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>valentine.exe</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 22px;
+      width: 420px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      display: none;
+    }
+
+    input {
+      padding: 14px;
+      width: 85%;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 14px 28px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 25px;
+    }
+
+    .yes {
+      background: white;
+      color: #ff4f81;
+      font-weight: bold;
+    }
+
+   .no {
+  position: absolute;
+  background: #ff4f81;
+  color: white;
+  cursor: not-allowed;
+  display: none;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- Screen 1 -->
+  <div class="card" id="screen1">
+    <p>Enter your name</p>
+    <input id="nameInput" placeholder="Type carefully 💖" />
+    <br>
+    <button class="yes" onclick="validateName()">Continue</button>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="card" id="screen2">
+    <p>Searching for your name in Krishna’s heart…</p>
+    <p>❤️‍🔥 ❤️‍🔥 ❤️‍🔥</p>
+  </div>
+
+  <!-- Screen 3 -->
+  <div class="card" id="screen3">
+    <p>Oh… looks like you’re the only one here 🥰</p>
+    <h2 id="finalName"></h2>
+    <p>Will you be my Valentine?</p>
+    <button class="yes" onclick="accept()">Yes 💘</button>
+  </div>
+
+  <!-- Access denied -->
+  <div class="card" id="denied">
+    <p>🚫 You’re not supposed to have this.</p>
+  </div>
+
+  <!-- Floating No button -->
+  <button class="no" id="noBtn">No 💔</button>
+
+  <script>
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+    const screen3 = document.getElementById("screen3");
+    const denied  = document.getElementById("denied");
+    const noBtn   = document.getElementById("noBtn");
+
+    // Start with only first screen
+    screen1.style.display = "block";
+
+    function validateName() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+
+      if (name !== "kanak" && name !== "kanak purswani") {
+        screen1.style.display = "none";
+        denied.style.display = "block";
+        return;
+      }
+
+      screen1.style.display = "none";
+      screen2.style.display = "block";
+
+      setTimeout(() => {
+        screen2.style.display = "none";
+        screen3.style.display = "block";
+
+        document.getElementById("finalName").innerText = name;
+
+        noBtn.style.left = "50%";
+        noBtn.style.top = "70%";
+        noBtn.style.display = "block";
+      }, 2500);
+    }
+
+    // Floating NO button behavior
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // YES → redirect to Instagram
+    function accept() {
+      window.location.href =
+        "https://www.instagram.com/kkrishnnaa._?igsh=eGN1em5xbms4ajl2";
+    }
+  </script>
+
+</body>
+</html>
